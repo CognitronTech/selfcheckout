@@ -12,6 +12,7 @@ gem 'rails', '~> 5.0.2'
 # Grape APi
 gem 'grape'
 gem 'devise'
+gem 'warden'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -36,17 +37,19 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem 'bcrypt', platforms: :ruby
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
+  gem 'byebug', platform: :ruby
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'sqlite3'
+    gem 'byebug', platform: :ruby
+
 end
 
 group :production do

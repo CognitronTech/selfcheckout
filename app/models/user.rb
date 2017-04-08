@@ -4,8 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
  
-  
-  attr_accessor :name, :email, :authentication_token
 
   before_save :ensure_authentication_token!
 

@@ -1,17 +1,16 @@
 module API  
 	module V1
 	  	class Users < Grape::API
+
 	  		  format :json
     		  prefix :api
 
 	     	resource :users do
 	     		desc 'Register endpoint.'
 		     	post :register do
-		            user = User.new(
-		              password:   params[:password],
-		              email:      params[:email]
-		            )
-
+		  		   user = User.new(email: params[:email],password: params[:password])
+		  		   p user.valid?
+		  		   p user.email
 		            if user.valid?
 		              user.save
 		              return user
@@ -23,7 +22,6 @@ module API
 			    post :login do
 			    	  email = params[:email]
 			          password = params[:password]
-
 			          if email.nil? or password.nil?
 			            error!({:error_code => 404, :error_message => "Enter email or password."}, 401)
 			            return
@@ -31,12 +29,12 @@ module API
 
 			          user = User.find_by(email: email.downcase)
 			          if user.nil?
-			             error!({:error_code => 404, :error_message => "Invalid email or password."}, 401)
+			             error!({:error_code => 404, :error_message => "Invalid email or password1."}, 401)
 			             return
 			          end
 
 			          if !user.valid_password?(password)
-			             error!({:error_code => 404, :error_message => "Invalid email or password."}, 401)
+			             error!({:error_code => 404, :error_message => "Invalid email or password2."}, 401)
 			             return
 			          else
 			            user.ensure_authentication_token!
